@@ -1,0 +1,33 @@
+{% extends "layout.html" %}
+{% block title %} Flash Card {% endblock %}
+{% block content %}
+
+    <h1>Flash Card</h1>
+    <p>Question: {{ card.question}} <br>
+        Answer: {{ card.answer}}</p>
+    
+        Go back to the <a href="{{ url_for('index') }}">Welcome page</a> <br> 
+        <p>
+            {% if index > min_index %}
+
+            <button>
+                <a href="{{ url_for('card', index=index - 1) }}">Previous Card</a>
+            </button>
+            
+                {% else %}
+                <a href="{{ url_for('card', index=0) }}" style="display: none;"></a>
+                {% endif %}
+        
+            </button>
+
+        <button>
+            {% if index < max_index %}
+            <a href="{{ url_for('card', index=index + 1) }}">Next Card</a>
+            {% else %}
+            <a href="{{ url_for('card', index=0) }}">Start over</a>
+            {% endif %}
+        </button>
+       
+    </p>
+    <button><a href="{{url_for('remove_card', index=index)}}">Remove card</a></button>
+{% endblock %}
